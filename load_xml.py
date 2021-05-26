@@ -28,6 +28,7 @@ def search(to_search):
 
     #저장
     global library_list  # , num_of_library
+    library_list = []
     library = docs.childNodes[0].childNodes
     # head = library[1].childNodes
     # num_of_library = head[1].childNodes[0].nodeValue
