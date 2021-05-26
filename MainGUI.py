@@ -1,6 +1,7 @@
 
 from tkinter import *
 from tkinter import font
+from tkinter import ttk
 import load_xml
 
 WIDTH = 500
@@ -38,15 +39,32 @@ class MainGUI:
         # 중단 결과 캠버스
         canvas_width = WIDTH-10
         canvas_height = HEIGHT - 145
-        self.result_canvas = Canvas(window, bg='white', width=canvas_width, height=canvas_height)
-        self.result_canvas.place(x=5, y=55, width=canvas_width, height=canvas_height)
+        self.result_Frame = Frame(window)
+        self.result_Frame.place(x=5, y=55, width=canvas_width, height=canvas_height)
+        self.result_canvas = Canvas(self.result_Frame)
+        self.result_canvas.pack(side=LEFT, fill="y")
+        self.result_scrollbar = ttk.Scrollbar(self.result_Frame, orient="vertical",
+                                              command=self.result_canvas.yview)
+        self.result_scrollbar.pack(side=RIGHT, fill="y")
+
+        self.result_canvas.configure(yscrollcommand=self.result_scrollbar.set)
+
+        self.result_canvas.bind("<Configure>", lambda e:
+        self.result_canvas.configure(scrollregion=self.result_canvas.bbox("all")))
+        self.actual_result_frame = Frame(self.result_canvas)
+        self.result_canvas.create_window((0,0), window=self.actual_result_frame, anchor="nw")
+
+        for i in range(50):
+            Button(self.actual_result_frame, text="botan "+str(i)).pack()
+
 
         # 하단 버튼 프레임 gmail 그래프 chatbot
         self.button_frame = Frame(window)
         self.button_frame.pack()
         self.button_frame.place(x=5, y=705, width=canvas_width, height=85)
 
-        button_width = canvas_width // 3
+
+        button_width = 22 # canvas_width // 3
         self.mail_button = Button(self.button_frame, text="Gmail", command=self.mail, width=button_width)
         self.mail_button.grid(row=0, column=0)
         self.graph_button = Button(self.button_frame, text="그래프", command=self.graph,width=button_width)
