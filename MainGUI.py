@@ -54,7 +54,7 @@ class MainGUI:
             return
         if self.manager.get_selection() is None:
             return
-        show_map.show_map(load_xml.library_list[self.manager.get_selection()])
+        show_map.show_map(load_xml.library_list, self.manager.get_selection())
 
 
     def __init__(self):
