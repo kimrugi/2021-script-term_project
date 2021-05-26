@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import font
 from tkinter import ttk
 import load_xml
-
+import box_manager
 WIDTH = 500
 HEIGHT = 800
 BUTTON_SIZE = 90
@@ -11,7 +11,7 @@ BUTTON_SIZE = 90
 class MainGUI:
     def search(self, event=0):
         load_xml.search(Entry.get(self.to_search))
-
+        box_manager.BoxManager(self.actual_result_frame, load_xml.library_list)
         pass
 
     def mail(self):

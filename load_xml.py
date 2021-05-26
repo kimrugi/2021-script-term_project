@@ -17,7 +17,6 @@ save_data_dict = {'SIGUN_NM': 'SIGUN_NM', 'LIBRRY_NM': 'LIBRRY_NM',
 
 
 library_list = []
-
 def search(to_search):
     #검색
     sigun = urllib.parse.quote(to_search)
@@ -28,10 +27,10 @@ def search(to_search):
     docs = parseString(resp.read().decode('utf-8'))
 
     #저장
-    global library_list
+    global library_list  # , num_of_library
     library = docs.childNodes[0].childNodes
-    head = library[1].childNodes
-    num_of_library = head[1].childNodes[0].nodeValue
+    # head = library[1].childNodes
+    # num_of_library = head[1].childNodes[0].nodeValue
     for row in library:
         if row.nodeName == "row":
             library_data = {}
