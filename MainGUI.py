@@ -39,23 +39,19 @@ class MainGUI:
         # 중단 결과 캠버스
         canvas_width = WIDTH-10
         canvas_height = HEIGHT - 145
-        self.result_Frame = Frame(window)
-        self.result_Frame.place(x=5, y=55, width=canvas_width, height=canvas_height)
-        self.result_canvas = Canvas(self.result_Frame)
-        self.result_canvas.pack(side=LEFT, fill="y")
-        self.result_scrollbar = ttk.Scrollbar(self.result_Frame, orient="vertical",
-                                              command=self.result_canvas.yview)
-        self.result_scrollbar.pack(side=RIGHT, fill="y")
+        result_Frame = Frame(window)
+        result_Frame.place(x=5, y=55, width=canvas_width, height=canvas_height)
+        result_canvas = Canvas(result_Frame)
+        result_canvas.pack(side=LEFT, fill="y")
+        result_scrollbar = ttk.Scrollbar(result_Frame, orient="vertical",
+                                              command=result_canvas.yview)
+        result_scrollbar.pack(side=RIGHT, fill="y")
+        result_canvas.configure(yscrollcommand=result_scrollbar.set)
+        result_canvas.bind("<Configure>", lambda e:
+        result_canvas.configure(scrollregion=result_canvas.bbox("all")))
+        self.actual_result_frame = Frame(result_canvas)
+        result_canvas.create_window((0,0), window=self.actual_result_frame, anchor="nw")
 
-        self.result_canvas.configure(yscrollcommand=self.result_scrollbar.set)
-
-        self.result_canvas.bind("<Configure>", lambda e:
-        self.result_canvas.configure(scrollregion=self.result_canvas.bbox("all")))
-        self.actual_result_frame = Frame(self.result_canvas)
-        self.result_canvas.create_window((0,0), window=self.actual_result_frame, anchor="nw")
-
-        for i in range(50):
-            Button(self.actual_result_frame, text="botan "+str(i)).pack()
 
 
         # 하단 버튼 프레임 gmail 그래프 chatbot
