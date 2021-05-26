@@ -1,7 +1,7 @@
 from tkinter import *
 
 class InfoBox:
-    def __init__(self, frame, data, x):
+    def __init__(self, frame, data, size, x):
         self.box_width = 490
         pass
 
