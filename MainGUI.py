@@ -12,6 +12,8 @@ class MainGUI:
     def search(self, event=0):
         load_xml.search(Entry.get(self.to_search))
 
+        pass
+
     def mail(self):
         pass
     def graph(self):
