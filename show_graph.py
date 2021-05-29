@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import font
+import math
 class Graph:
     def __init__(self, data_list):
         graph_window = Tk()
@@ -15,17 +16,26 @@ class Graph:
         for data in data_list:
             book_num_list.append(eval(data["BOOK_NUM"]))
             name_list.append(data["LIBRRY_NM"])
-        max_num = max(book_num_list)
-        top_ws = 20
+        max_num_org = max(book_num_list)
+        digits = 10**(len(str(max_num_org))-1)
+
+        max_num = math.ceil(max_num_org / digits) * digits
+        bottom_ws = 20
         left_ws = 50
         bar_max_height = 400
         bar_height_per_num = bar_max_height / max_num
         bar_width = 50
         bar_distance = 35
-        y2 = self.height - top_ws
+        y2 = self.height - bottom_ws
+        self.canvas.create_line(left_ws//2+20, bottom_ws, left_ws//2+20, self.height-bottom_ws)
+        legend = max_num / 4
+        for i in range(5):
+            line_height = self.height - (i*legend*bar_height_per_num + bottom_ws)
+            self.canvas.create_line(left_ws//2+15, line_height, left_ws//2+25, line_height)
+            self.canvas.create_text(left_ws//2-10, line_height, text=str(int(i*legend)))
         for i in range(len(name_list)):
             x1 = i * bar_width + i * bar_distance + left_ws
-            y1 = self.height - (book_num_list[i]*bar_height_per_num+top_ws)
+            y1 = self.height - (book_num_list[i]*bar_height_per_num+bottom_ws)
             x2 = (i+1) * bar_width + i * bar_distance + left_ws
             self.canvas.create_rectangle(x1, y1, x2, y2, fill="pink")
             text_size = ("Arial", 45//len(name_list[i]))
