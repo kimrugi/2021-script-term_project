@@ -5,6 +5,7 @@ from tkinter import ttk
 import load_xml
 import box_manager
 import show_map
+import show_graph
 
 WIDTH = 500
 HEIGHT = 800
@@ -45,7 +46,9 @@ class MainGUI:
 
     def mail(self):
         pass
+
     def graph(self):
+        show_graph.Graph(load_xml.library_list)
         pass
     def telegram(self):
         pass

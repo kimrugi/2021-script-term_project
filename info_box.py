@@ -1,6 +1,4 @@
 from tkinter import *
-from PIL import Image, ImageDraw, ImageFont, ImageTk
-import textwrap
 
 class InfoBox:
     def __init__(self, frame, data, size, command):
@@ -13,7 +11,6 @@ class InfoBox:
         Label(self.body, text=data["ADDRESS"]).pack()
         Button(self.body, text="선택", command=command).pack()
         self.body_canvas.create_window((0, 0), window=self.body, anchor="nw", height=self.height, width=450)
-
         pass
 
 
