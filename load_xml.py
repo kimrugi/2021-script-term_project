@@ -17,12 +17,17 @@ save_data_dict = {'SIGUN_NM': 'SIGUN_NM', 'LIBRRY_NM': 'LIBRRY_NM',
 
 
 library_list = []
+local_library_list = []
+
+def search_name_and_register(name):
+    global library_list
+    library_list = search_name(name)
+    return
 
 
 def search_name(name, lib_list=None):
     if lib_list is None:
-        global library_list
-        lib_list = library_list
+        lib_list = local_library_list
     result = []
     for lib in lib_list:
         if lib["LIBRRY_NM"].find(name) != -1:
@@ -35,8 +40,8 @@ def search_name(name, lib_list=None):
 
 
 def search_and_register(to_search):
-    global library_list
-    library_list = search(to_search)
+    global library_list, local_library_list
+    local_library_list = library_list = search(to_search)
 
 def search(to_search):
     #검색
@@ -48,7 +53,7 @@ def search(to_search):
     docs = parseString(resp.read().decode('utf-8'))
 
     #저장
-    library_list = []
+    lib_list = []
     library = docs.childNodes[0].childNodes
     # head = library[1].childNodes
     # num_of_library = head[1].childNodes[0].nodeValue
@@ -58,8 +63,8 @@ def search(to_search):
             for comp in row.childNodes:
                 if comp.nodeName in save_data_dict.keys():
                     library_data[save_data_dict[comp.nodeName]] = comp.childNodes[0].nodeValue
-            library_list.append(library_data)
-    return library_list
+            lib_list.append(library_data)
+    return lib_list
 
 
 

@@ -48,6 +48,10 @@ class MainGUI:
         pass
 
     def graph(self):
+        if self.manager is None:
+            return
+        if self.manager.get_selection() is None:
+            return
         show_graph.Graph(load_xml.library_list)
         pass
     def telegram(self):

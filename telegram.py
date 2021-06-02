@@ -67,9 +67,4 @@ def create_bot():
     bot.message_loop(handle)
 
 
-create_bot()
-import time
-while 1:
-    time.sleep(10)
-
 
