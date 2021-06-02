@@ -42,6 +42,30 @@ def search(to_search):
     return
 
 
+def indiependent_search(to_search):
+    #검색
+    sigun = urllib.parse.quote(to_search)
+    key = '961adfdf5c574548bf2e9352dde74c19'
+    url = "https://openapi.gg.go.kr/Library?" + "KEY=" + key + "&SIGUN_NM=" + sigun
+    req = urllib.request.Request(url)
+    resp = urllib.request.urlopen(req)
+    docs = parseString(resp.read().decode('utf-8'))
+
+    #저장
+    library_list = []
+    library = docs.childNodes[0].childNodes
+    # head = library[1].childNodes
+    # num_of_library = head[1].childNodes[0].nodeValue
+    for row in library:
+        if row.nodeName == "row":
+            library_data = {}
+            for comp in row.childNodes:
+                if comp.nodeName in save_data_dict.keys():
+                    library_data[save_data_dict[comp.nodeName]] = comp.childNodes[0].nodeValue
+            library_list.append(library_data)
+    return library_list
+
+
 
 
 
