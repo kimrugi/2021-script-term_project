@@ -40,7 +40,7 @@ class MainGUI:
         self.manager = box_manager.BoxManager(self.actual_result_frame, load_xml.library_list)
 
     def search(self, event=0):
-        load_xml.search(Entry.get(self.to_search))
+        load_xml.search_and_register(Entry.get(self.to_search))
         self.show_result_frame()
         pass
 
