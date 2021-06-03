@@ -57,8 +57,6 @@ class MainGUI:
     def graph(self):
         if self.manager is None:
             return
-        if self.manager.get_selection() is None:
-            return
         show_graph.Graph(load_xml.library_list)
         pass
     def telegram(self):
@@ -67,7 +65,7 @@ class MainGUI:
         if self.manager is None:
             return
         if self.manager.get_selection() is None:
-            return
+            show_map.show_map(load_xml.library_list)
         show_map.show_map(load_xml.library_list, self.manager.get_selection())
 
 

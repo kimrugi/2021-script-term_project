@@ -21,7 +21,7 @@ class Graph:
 
         max_num = math.ceil(max_num_org / digits) * digits
         bottom_ws = 20
-        left_ws = 50
+        left_ws = 80
         bar_max_height = 400
         bar_height_per_num = bar_max_height / max_num
         bar_width = 50
