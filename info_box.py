@@ -9,9 +9,16 @@ class InfoBox:
 
         Label(self.body, text=data["LIBRRY_NM"]).pack()
         Label(self.body, text=data["ROAD_ADDRESS"]).pack()
-        Button(self.body, text="선택", command=command).pack()
+        self.button = Button(self.body, text="선택", command=command)
+        self.button.pack()
         self.body_canvas.create_window((0, 0), window=self.body, anchor="nw", height=self.height, width=450)
         pass
+
+    def button_selected(self):
+        self.button.configure(bg="red")
+
+    def button_unselected(self):
+        self.button.configure(bg='SystemButtonFace')
 
 
 

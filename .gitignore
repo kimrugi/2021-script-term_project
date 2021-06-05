@@ -4,3 +4,5 @@ __pycache__/MainGUI.cpython-39.pyc
 *.pyc
 osm.html
 osm.html
+osm.html
+*.html
