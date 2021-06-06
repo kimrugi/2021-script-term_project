@@ -6,6 +6,7 @@ import load_xml
 import box_manager
 import show_map
 import show_graph
+import send_mail
 
 WIDTH = 500
 HEIGHT = 800
@@ -52,7 +53,11 @@ class MainGUI:
         self.show_result_frame()
 
     def mail(self):
-        pass
+        if self.manager is None:
+            return
+        if self.manager.get_selection() is not None:
+            send_mail.Mail(load_xml.library_list[self.manager.get_selection()])
+
 
     def graph(self):
         if self.manager is None:
