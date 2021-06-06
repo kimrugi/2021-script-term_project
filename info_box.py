@@ -1,4 +1,5 @@
 from tkinter import *
+import datetime
 
 class InfoBox:
     def __init__(self, frame, data, size, command):
@@ -9,8 +10,18 @@ class InfoBox:
 
         Label(self.body, text=data["LIBRRY_NM"]).pack()
         Label(self.body, text=data["ROAD_ADDRESS"]).pack()
-        self.button = Button(self.body, text="선택", command=command)
-        self.button.pack()
+        self.time_check(data)
+        time_text = "평일 운영시간: "+data["BEGIN_TM"] + "~" + data["END_TM"] +\
+                    "\n토요일 운영시간: " + data["SAT_BEGIN_TM"] + "~" + data["SAT_END_TM"]
+        Label(self.body, text=time_text).pack()
+
+        if self.time_check(data):
+            Label(self.body, text="개관").pack()
+        else:
+            Label(self.body, text="휴관").pack()
+
+        self.button = Button(self.body, text="선택", command=command, width=5, height=5)
+        self.button.place(x=390, y=3)
         self.body_canvas.create_window((0, 0), window=self.body, anchor="nw", height=self.height, width=450)
         pass
 
@@ -20,6 +31,23 @@ class InfoBox:
     def button_unselected(self):
         self.button.configure(bg='SystemButtonFace')
 
+    def time_check(self, data):
+        now = datetime.datetime.today()
+        if now.weekday() == 6:
+            return False
+
+        current_time = datetime.datetime(1900,1,1, now.hour, now.minute)
+        if now.weekday() == 5:
+            begin_time = datetime.datetime.strptime(data["SAT_BEGIN_TIME"], "%H:%M")
+            end_time = datetime.datetime.strptime(data["SAT_END_TIME"], "%H:%M")
+            if begin_time < current_time < end_time:
+                return True
+            return False
+        begin_time = datetime.datetime.strptime(data["BEGIN_TIME"], "%H:%M")
+        end_time = datetime.datetime.strptime(data["END_TIME"], "%H:%M")
+        if begin_time < current_time < end_time:
+            return True
+        return False
 
 
 

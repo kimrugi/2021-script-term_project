@@ -53,21 +53,22 @@ class MainGUI:
         self.show_result_frame()
 
     def mail(self):
-        if self.manager is None:
+        if not load_xml.library_list:
             return
         if self.manager.get_selection() is not None:
             send_mail.Mail(load_xml.library_list[self.manager.get_selection()])
 
 
     def graph(self):
-        if self.manager is None:
+        if not load_xml.library_list:
             return
         show_graph.Graph(load_xml.library_list)
         pass
     def telegram(self):
         pass
+
     def map(self):
-        if self.manager is None:
+        if not load_xml.library_list:
             return
         if self.manager.get_selection() is None:
             show_map.show_map(load_xml.library_list)
@@ -102,24 +103,24 @@ class MainGUI:
         self.result_frame = self.result_canvas = self.result_scrollbar = self.actual_result_frame = None
         self.show_result_frame()
 
-
         # 하단 버튼 프레임 gmail 그래프 chatbot
         self.button_frame = Frame(self.window)
-        #self.button_frame.pack()
-        self.button_frame.place(x=5, y=750, width=canvas_width, height=85)
+        # self.button_frame.pack()
+        self.button_frame.place(x=5, y=710, width=canvas_width)
 
+        button_width = 21
+        mail_image = PhotoImage(file="image/gmail.png")
+        graph_image = PhotoImage(file="image/graph.png")
+        map_image = PhotoImage(file="image/map.png")
 
-        button_width = 15
-        self.mail_button = Button(self.button_frame, text="Gmail", command=self.mail, width=button_width)
-        self.mail_button.grid(row=0, column=0)
-        self.graph_button = Button(self.button_frame, text="그래프", command=self.graph,width=button_width)
-        self.graph_button.grid(row=0, column=1)
-        self.telegram_button = Button(self.button_frame, text="전송", command=self.telegram,width=button_width)
-        self.telegram_button.grid(row=0, column=2)
-        self.map_button = Button(self.button_frame, text="지도", command=self.map,width=button_width)
-        self.map_button.grid(row=0, column=3)
+        self.mail_button = Button(self.button_frame, image=mail_image, command=self.mail)
+        self.graph_button = Button(self.button_frame, image=graph_image, command=self.graph)
+        self.map_button = Button(self.button_frame, image=map_image, command=self.map)
 
-
+        Label(self.button_frame, text="", height=100).pack(side=RIGHT)
+        self.mail_button.place(x=50, y=0)
+        self.graph_button.place(x=200, y=0)
+        self.map_button.place(x=350, y=0)
         self.window.mainloop()
 
 
