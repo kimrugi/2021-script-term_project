@@ -63,9 +63,6 @@ class MainGUI:
         if not load_xml.library_list:
             return
         show_graph.Graph(load_xml.library_list)
-        pass
-    def telegram(self):
-        pass
 
     def map(self):
         if not load_xml.library_list:
@@ -74,11 +71,11 @@ class MainGUI:
             show_map.show_map(load_xml.library_list)
         show_map.show_map(load_xml.library_list, self.manager.get_selection())
 
-
     def __init__(self):
         self.window = Tk()
         self.window.geometry(str(WIDTH)+"x"+str(HEIGHT))
         self.window.resizable(width=False, height=False)
+        self.window.title("경기도 도서관 검색")
         # 상단 검색 프레임
         s_font = font.Font(self.window, size=17, weight='bold', family='consolas')
 

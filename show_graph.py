@@ -1,9 +1,10 @@
 from tkinter import *
-from tkinter import font
 import math
+
 class Graph:
     def __init__(self, data_list):
         graph_window = Tk()
+        graph_window.title("그래프")
         Label(graph_window, text=data_list[0]["SIGUN_NM"]+" 도서관 도서 보유량").pack()
         self.width = 800
         self.height = 500
@@ -49,21 +50,4 @@ class Graph:
         self.canvas.config(xscrollcommand=self.scrollbar.set)
         self.canvas.pack(side=LEFT, expand=True, fill=BOTH)
         graph_window.mainloop()
-        pass
-'''
-y_stretch = 15
-y_gap = 20
-x_stretch = 10
-x_width = 20
-x_gap = 20
-for x, y in enumerate(data):
-    # calculate reactangle coordinates
-    x0 = x * x_stretch + x * x_width + x_gap
-    y0 = c_height - (y * y_stretch + y_gap)
-    x1 = x * x_stretch + x * x_width + x_width + x_gap
-    y1 = c_height - y_gap
-    # Here we draw the bar
-    c.create_rectangle(x0, y0, x1, y1, fill="red")
-    c.create_text(x0+2, y0, anchor=SW, text=str(y))
-root.mainloop()
-'''
+

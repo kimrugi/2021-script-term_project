@@ -58,8 +58,6 @@ def handle(msg):
         to_search = text.replace(args[0]+" ", '')
         lib_list = load_xml.search_name(to_search, load_xml.search(args[0]))
         reply_info(lib_list, chat_id)
-    pass
-
 
 def create_bot():
     global bot

@@ -1,6 +1,9 @@
 from tkinter import *
 import datetime
 
+mid_night0 = datetime.datetime.strptime("00:00", "%H:%M")
+mid_night24 = datetime.datetime.strptime("23:59", "%H:%M")
+
 class InfoBox:
     def __init__(self, frame, data, size, command):
         self.height = size
@@ -23,7 +26,6 @@ class InfoBox:
         self.button = Button(self.body, text="선택", command=command, width=5, height=5)
         self.button.place(x=390, y=3)
         self.body_canvas.create_window((0, 0), window=self.body, anchor="nw", height=self.height, width=450)
-        pass
 
     def button_selected(self):
         self.button.configure(bg="red")
@@ -38,13 +40,22 @@ class InfoBox:
 
         current_time = datetime.datetime(1900,1,1, now.hour, now.minute)
         if now.weekday() == 5:
-            begin_time = datetime.datetime.strptime(data["SAT_BEGIN_TIME"], "%H:%M")
-            end_time = datetime.datetime.strptime(data["SAT_END_TIME"], "%H:%M")
+            begin_time = datetime.datetime.strptime(data["SAT_BEGIN_TM"], "%H:%M")
+            end_time = datetime.datetime.strptime(data["SAT_END_TM"], "%H:%M")
+            if begin_time == mid_night0:
+                begin_time = mid_night24
+            if end_time == mid_night0:
+                end_time = mid_night24
             if begin_time < current_time < end_time:
                 return True
             return False
-        begin_time = datetime.datetime.strptime(data["BEGIN_TIME"], "%H:%M")
-        end_time = datetime.datetime.strptime(data["END_TIME"], "%H:%M")
+
+        begin_time = datetime.datetime.strptime(data["BEGIN_TM"], "%H:%M")
+        end_time = datetime.datetime.strptime(data["END_TM"], "%H:%M")
+        if begin_time == mid_night0:
+            begin_time = mid_night24
+        if end_time == mid_night0:
+            end_time = mid_night24
         if begin_time < current_time < end_time:
             return True
         return False
